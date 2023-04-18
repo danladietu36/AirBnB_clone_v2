@@ -12,12 +12,12 @@ class FileStorage:
         """Returns a dictionary of models currently in storage"""
         if not cls:
             return self.__objects
-        elif type(cls) == str:
-            return {k: v for k, v in self.__objects.items()
-                    if v.__class__.__name__ == cls}
-        else:
-            return {k: v for k, v in self.__objects.items()
-                    if v.__class__ = cls}
+        cls_name = cls.__name__
+        dct ={}
+        for key in self.__objects.keys():
+            if key.split('.')[0] == cls_name:
+                dct[key] = self.__objects[key]
+        return dct
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
@@ -65,3 +65,7 @@ class FileStorage:
         if obj is not None:
             del self.__objects[obj.__class__.__name__ + '.' + obj.id]
             self.save()
+
+     def close(self):
+        """Deserialize JSON file to objects"""
+        self.reload()
