@@ -9,4 +9,4 @@ GRANT ALL PRIVILEGES ON hbnb_dev_db TO 'hbnb_dev'@'localhost';
 FLUSH PRIVILEGES;
 --Grant sellect privilege for the user hbnb_dev in the de performance schema
 GRANT SELECT ON performance_schema.* TO 'hbnb_dev'@'localhost';
-FLUSH PRIVILEGES
+FLUSH PRIVILEGES;
