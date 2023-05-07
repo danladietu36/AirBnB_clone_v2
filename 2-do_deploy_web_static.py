@@ -1,13 +1,12 @@
 #!/usr/bin/python3
-""" Module to compress web package
+"""Module to compress web package
 """
-
 from os import path
-from Fabric.api import *
 from datetime import datetime
+from fabric.api import *
 
 
-env.hosts = ['100.25.19.204', '54.157.159.85']
+env.hosts = ['34.239.248.111', '54.175.89.17']
 env.user = 'ubuntu'
 env.keyFilename = '~/.ssh/id_rsa'
 
