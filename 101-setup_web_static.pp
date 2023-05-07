@@ -1,4 +1,4 @@
-# Puppet code for setup
+# Using Puppet to set up web_static server
 
 $nginx_conf = "server {
     listen 80 default_server;
