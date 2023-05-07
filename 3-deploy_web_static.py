@@ -4,9 +4,10 @@ from datetime import datetime
 from fabric.api import env
 from fabric.api import local
 from fabric.api import put
-from fabric.api import 
+from fabric.api import run
 
 env.hosts = ['34.239.248.111', '54.175.89.17']
+
 
 def do_pack():
     """Creates a tar gzip archive of the web_static dir"""
@@ -23,6 +24,7 @@ def do_pack():
     if local("tar -cvzf {} web_static".format(fileName)).failed is True:
         return None
     return fileName
+
 
 def do_deploy(archive_path):
     """Distributes archive to web server.
