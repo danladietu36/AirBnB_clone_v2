@@ -14,7 +14,7 @@ def do_pack():
     d_time = datetime.utcnow()
     fileName = "versions/web_static_{}{}{}{}{}{}.tgz".format(d_time.year,
                                                          d_time.month,
-                                                         dt.day,
+                                                         d_time.day,
                                                          d_time.hour,
                                                          d_time.minute,
                                                          d_time.second)
@@ -69,6 +69,6 @@ def do_deploy(archive_path):
 def deploy():
     """Creates and distribute archive to server."""
     fileName = do_pack()
-    if file is None:
+    if fileName is None:
         return False
     return do_deploy(fileName)
