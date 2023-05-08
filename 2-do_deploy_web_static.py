@@ -1,54 +1,41 @@
 #!/usr/bin/python3
-"""Module to compress web package
-"""
-from os import path
-from datetime import datetime
-from fabric.api import *
+"""Module to deploy an archive to servers with Fabric3"""
+
+from fabric import api
+from fabric.contrib import files
+import os
 
 
-env.hosts = ['34.239.248.111', '54.175.89.17']
-env.user = 'ubuntu'
-env.keyFilename = '~/.ssh/id_rsa'
+api.env.hosts = ['34.239.248.111', '54.175.89.17']
+api.env.user = 'ubuntu'
+api.env.key_filename = '~/.ssh/alx_server'
 
 
 def do_deploy(archive_path):
-    """Deploy web files to server
+    """This  transfers archive_path to web servers.
+    Arguments:
+        archive_path (str): .tgz file to transfer
+    Returns: 1 on success, 0 otherwise.
     """
-    try:
-        if not (path.exists(archive_path)):
-            return False
-
-            # upload archive
-            put(archive_path, '/tmp/')
-
-            # create target dir
-            timestamp = archive_path[-18:-4]
-            run('sudo mkdir -p /data/web_static/\
-releases/web_static_{}/'.format(timestamp))
-
-            # uncompress archive and delete .tgz
-            run('sudo tar -xzf /tmp/web_static_{}.tgz -C \
-/data/web_static/releases/web_static_{}/'.format(timestamp, timestamp))
-
-            # remove archive
-            run('sudo rm /tmp/web_static_{}.tgz'.format(timestamp))
-
-            # move contents into host web_static
-            run('sudo mv /data/web_static/releases/web_static_{}/web_static/* \
-/data/web_static/releases/web_static_{}/'.format(timestamp, timestamp))
-
-            # remove extraneous web_static dir
-            run('sudo rm -rf /data/web_static/releases/\
-web_static_{}/web_static'.format(timestamp))
-
-            # delete pre-existing sym link
-            run('sudo rm -rf /data/web_static/current')
-
-            # re-establish symbolic link
-            run('sudo ln -s /data/web_static/releases/\
-web_static_{}/ /data/web_static/current'.format(timestamp))
-    except:
+    if not os.path.isfile(archive_path):
         return False
-
-    # return True on success
-    return True
+    with api.cd('/tmp'):
+        basename = os.path.basename(archive_path)
+        root, ext = os.path.splitext(basename)
+        outpath1 = '/data/web_static/releases/{}'.format(root)
+        try:
+            putpath1 = api.put(archive_path)
+            if files.exists(outpath1):
+                api.run('rm -rdf {}'.format(outpath1))
+            api.run('mkdir -p {}'.format(outpath1))
+            api.run('tar -xzf {} -C {}'.format(putpath1[0], outpath1))
+            api.run('rm -f {}'.format(putpath1[0]))
+            api.run('mv -u {}/web_static/* {}'.format(outpath1, outpath1))
+            api.run('rm -rf {}/web_static'.format(outpath1))
+            api.run('rm -rf /data/web_static/current')
+            api.run('ln -sf {} /data/web_static/current'.format(outpath1))
+            print('New version deployed!')
+        except:
+            return False
+        else:
+            return True
