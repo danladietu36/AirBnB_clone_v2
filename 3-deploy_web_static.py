@@ -10,7 +10,6 @@ from fabric.api import env, local, put, run, runs_once
 env.hosts = ['34.239.248.111', '54.175.89.17']
 
 
-@run_once
 def do_pack():
     """Archives the static files."""
     if not os.path.isdir("versions"):
