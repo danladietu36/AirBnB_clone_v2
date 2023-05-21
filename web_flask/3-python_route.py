@@ -12,7 +12,7 @@ app = Flask("__name__")
 @app.route('/', strict_slashes=False)
 def hello():
     """Function to display HBNB"""
-    return ("HBNB")
+    return ("Hello HBNB!")
 
 
 @app.route("/hbnb", strict_slashes=False)
@@ -27,6 +27,7 @@ def c_text(text):
     return "C {}".format(text.replace("_", " "))
 
 
+@app.route('/python', strict_slashes=False)
 @app.route("/python/<text>", strict_slashes=False)
 def python_text(text="is cool"):
     """ Function to display Python followed by the value of text variable"""
