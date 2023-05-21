@@ -16,14 +16,14 @@ def hello():
     return ("Hello HBNB!")
 
 
-@app.route('/hbnb', strict_slashes=False)
+@app.route("/hbnb", strict_slashes=False)
 def hbnb():
     """Function to display HBNB"""
     return ("HBNB")
 
 
-@app.route('/c/<text>', strict_slashes=False)
-def text():
+@app.route("/c/<text>", strict_slashes=False)
+def c_text(text):
     """Function to display C followed by text variable's value"""
     return "C {}".format(text.replace("_", " "))
 
