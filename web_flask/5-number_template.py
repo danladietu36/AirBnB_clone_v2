@@ -11,13 +11,13 @@ app = Flask(__name__)
 @app.route('/', strict_slashes=False)
 def hello():
     """ A function that display Hello HBNB!."""
-    return ("Hello HBNB!")
+    return "Hello HBNB!"
 
 
 @app.route("/hbnb", strict_slashes=False)
 def hbnb():
     """ A function taht displays HBNB."""
-    return ("HBNB")
+    return "HBNB"
 
 
 @app.route("/c/<text>", strict_slashes=False)
@@ -37,7 +37,7 @@ def text_python(text="is cool"):
 def is_Num(n):
     """ A function to dispaly n if only n is integer."""
     if type(n) is int:
-        return (n)
+        return "{} is a number".format(n)
 
 
 @app.route("/number_template/<n:int>", strict_slashes)
@@ -47,4 +47,4 @@ def num_template(n=None):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=None)
+    app.run()
