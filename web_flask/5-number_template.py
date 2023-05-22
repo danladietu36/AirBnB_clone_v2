@@ -26,21 +26,21 @@ def c_text(text):
     return "C {}".format(text.replace("_", " "))
 
 
-@app.route("/python", strict_slashes)
-@app.route("/python/<text>", strict_slashes)
+@app.route("/python", strict_slashes=False)
+@app.route("/python/<text>", strict_slashes=False)
 def text_python(text="is cool"):
     """ A function that displays Python followed by value of text variable"""
     return "Python {}".format(text.replace("_", " "))
 
 
-@app.route("/number/<n:int>", strict_slashes)
+@app.route("/number/<n:int>", strict_slashes=False)
 def is_Num(n):
     """ A function to dispaly n if only n is integer."""
     if type(n) is int:
         return "{} is a number".format(n)
 
 
-@app.route("/number_template/<n:int>", strict_slashes)
+@app.route("/number_template/<n:int>", strict_slashes=False)
 def num_template(n=None):
     """ A function to display HTML page only if n is integer."""
     return render_template("5-number.html", n=n)
