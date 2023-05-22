@@ -33,17 +33,18 @@ def text_python(text="is cool"):
     return "Python {}".format(text.replace("_", " "))
 
 
-@app.route("/number/<n:int>", strict_slashes=False)
+@app.route("/number/<int:n>", strict_slashes=False)
 def is_Num(n):
     """ A function to dispaly n if only n is integer."""
     if type(n) is int:
         return "{} is a number".format(n)
 
 
-@app.route("/number_template/<n:int>", strict_slashes=False)
+@app.route("/number_template/<int:n>", strict_slashes=False)
 def num_template(n=None):
     """ A function to display HTML page only if n is integer."""
-    return render_template("5-number.html", n=n)
+    if type(n) is int:
+        return render_template("5-number.html", n=n)
 
 
 if __name__ == "__main__":
