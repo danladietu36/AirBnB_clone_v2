@@ -28,8 +28,8 @@ def stateId(id):
     """ A method to display html page with state and scities"""
     for state in storage.all(State).values():
         if state.id == id:
-            return render_template("9-states.html", states=state, mode=id)
-        return render_template("9-states.html", states=state, mode=None)
+            return render_template("9-states.html", states=state, mode="id")
+        return render_template("9-states.html", states=state, mode="none")
 
 
 if __name__ == "__main__":
