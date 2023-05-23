@@ -1,4 +1,4 @@
-#!/urs/bin/python3
+#!/usr/bin/python3
 """ A script to start a Flask web application
    It must listen at 0.0.0.0., port 5000
 """
