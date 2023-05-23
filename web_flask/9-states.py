@@ -2,7 +2,7 @@
 """ A script that start a Flask web application
    It must be listening at 0.0.0.0., port 5000
 """
-from flask import Flask
+from flask import Flask, render_template
 from models import storage
 from models.state import State
 
