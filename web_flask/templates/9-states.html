@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="eng">
 	<head>
 		<title>HBNB</title>
 	</head>
@@ -11,7 +11,7 @@
 				<li>{{ state.id }}: <b>{{ state.name }}</b></li>
 			{% endfor %}
 			</ul>
-		{elif mode == 'id' %}
+		{% elif mode == 'id' %}
 			<h1>State: {{ states.name }}</h1>
 			<h3>Cities:</h3>
 			<ul>
