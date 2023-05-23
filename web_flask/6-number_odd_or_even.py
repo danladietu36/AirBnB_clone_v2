@@ -52,7 +52,7 @@ def odd_Num(n=None):
         if n % 2:
             num = "odd"
         else:
-            num "even"
+            num = "even"
         return render_template("6-number_odd_or_even.html", n=n, num=num)
 
 
