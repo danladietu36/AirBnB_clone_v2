@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" A script that start a Flask web application
+""" A script that starta Flask web application
    It must be listening at 0.0.0.0., port 5000
 """
 from flask import Flask, render_template
@@ -20,10 +20,10 @@ def close():
 def state():
     """ A method to display html page with state."""
     states = storage.all(State)
-    return render_template("9-states.html", states=states, mode='all')
+    return render_template("9-states.html", states=states, mode="all")
 
 
-@app.route("/states/<id>", strict_slashes)
+@app.route("/states/<id>", strict_slashes=False)
 def stateId(id):
     """ A method to display html page with state and scities"""
     for state in storage.all(State).values():
