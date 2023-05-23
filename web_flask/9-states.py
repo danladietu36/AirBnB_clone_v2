@@ -11,26 +11,26 @@ app = Flask(__name__)
 
 
 @app.teardown_appcontext
-def close():
-    """ A method to close the SQLAlchemy session"""
+def close(self):
+    """ Method to close the session """
     storage.close()
 
 
-@app.route("/states", strict_slashes=False)
+@app.route('/states', strict_slashes=False)
 def state():
-    """ A method to display html page with state."""
+    """Displays a html page with states"""
     states = storage.all(State)
-    return render_template("9-states.html", states=states, mode="all")
+    return render_template('9-states.html', states=states, mode='all')
 
 
-@app.route("/states/<id>", strict_slashes=False)
-def stateId(id):
-    """ A method to display html page with state and scities"""
+@app.route('/states/<id>', strict_slashes=False)
+def state_id(id):
+    """Displays a html page with citys of that state"""
     for state in storage.all(State).values():
         if state.id == id:
-            return render_template("9-states.html", states=state, mode="id")
-        return render_template("9-states.html", states=state, mode="none")
+            return render_template('9-states.html', states=state, mode='id')
+    return render_template('9-states.html', states=state, mode='none')
 
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+if __name__ == '__main__':
+    app.run(host="0.0.0.0", port="5000")
